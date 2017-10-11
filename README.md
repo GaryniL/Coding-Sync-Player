@@ -1,4 +1,4 @@
-## Coding Sync-Video Player
+## Coding Synchronized Video Player
 
 ![](./image/example.png)
 
