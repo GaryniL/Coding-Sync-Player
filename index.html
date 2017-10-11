@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="./FileSaver.min.js"></script>
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/GaryniL/e954703fa36daf0bcd9d71367b0e61e9/raw/22fac872e8941624f46f998acba081ca7b236d82/popcorn.min.js"></script>
+    <script type="text/javascript" src="./player.js"></script>
+    <script type="text/javascript" src="./humanCoding.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" type="text/css">
+    <link href="./player.css" rel="stylesheet" type="text/css"/>
+
+  	<title>Sync Coding Player</title>
+</head>
+<body>
+  <div class="row">
+    <div class="col-6" id="video_part1_div">
+      <video class="col-12 embed-responsive embed-responsive-4by3"  id="video_part1" controls="true" data-setup='{ "inactivityTimeout": 0 }'> 
+      <source ></source>
+      </video>
+    </div>
+
+    <div class="col-6" id="video_part2_div">
+      <video class="col-12 embed-responsive embed-responsive-4by3" id="video_part2" muted controls> 
+        <source ></source>
+      </video>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="col-1 offset-3 btn btn-success" id="closeVideoBtn" onclick="closeVideoBtnOnClick(this,'u1')">Close</button>
+    <button type="button" class="col-1 offset-4 btn btn-success" id="closeVideoBtn" onclick="closeVideoBtnOnClick(this,'u2')">Close</button>
+  </div>
+
+  
+  <!-- <input type="range" value="0" id="scrub" /> -->
+  <!-- 資訊群組文字 -->
+  <div class="row">
+    <p class="col-2 offset-2" id="timeTxt"> 00:00 </p>
+    <p class="col-2" id="speedTxt"> 1.0 x </p>
+    <p class="col-2 showTxt" > ( "[" , "]" ) </p>
+  </div>
+
+  <!-- 設定群組按扭 -->
+  <div class="row">
+
+    <!-- video set btn -->
+    <div class="col-2 offset-1 input-group">
+      <input type="text" class=" form-control" id="groupNameField" placeholder="Group Name" value="Switch_Mario.mp4">
+
+      <span class="input-group-btn">
+        <button type="button" class=" btn btn-success" id="submitOffsetBtn" onclick="groupNameBtnOnClick(this)">Reload</button>
+      </span>
+    </div>
+
+    <!-- video offset set btn -->
+    <div class="col-2 offset-0 input-group">
+      <input type="text" class=" form-control" id="offsetSecField" placeholder="Offset Sec:">
+
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-success" id="submitOffsetBtn" onclick="offsetBtnOnClick()">Offset</button>
+      </span>
+    </div>
+  </div>
+
+  <br><br><br>
+  <!-- 評分群組按扭 -->
+  <div class="row">
+    <div class="col-4 offset-1 btn-group" role="group" >
+      <button type="button" class="col-3 btn btn-default" id="UI_iconic"    onclick="btnOnClick(this,'iconic','u1')" >Iconic</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_meta"      onclick="btnOnClick(this,'meta','u1')" >Metaphoric</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_noniconic" onclick="btnOnClick(this,'noniconic','u1')" >Non-Iconic</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_pointing"  onclick="btnOnClick(this,'point','u1')" >Pointing</button>
+    </div>
+
+    <div class="col-2 offset-0" >
+      <button type="button" class="col-5 btn btn-warning" onclick="ideaBtnOnClick('u1')" >Idea-U1</button>
+      <button type="button" class="col-5 btn btn-warning" onclick="ideaBtnOnClick('u2')" >Idea-U2</button>
+    </div>
+
+    <div class="col-4 offset-0 btn-group" role="group" >
+      <button type="button" class="col-3 btn btn-default" id="UI_iconic"    onclick="btnOnClick(this,'iconic','u2')" >Iconic</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_meta"      onclick="btnOnClick(this,'meta','u2')" >Metaphoric</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_noniconic" onclick="btnOnClick(this,'noniconic','u2')" >Non-Iconic</button>
+      <button type="button" class="col-3 btn btn-default" id="UI_pointing"  onclick="btnOnClick(this,'point','u2')" >Pointing</button>
+    </div>
+  </div>
+  <br><br>
+  <button type="button" class="col-1 offset-4 btn btn-success" id="exportBtn" onclick="exportBtnOnClick('u1')">Export</button>
+  <button type="button" class="col-1 offset-2 btn btn-success" id="exportBtn" onclick="exportBtnOnClick('u2')">Export</button>
+
+  <br><br><br>
+
+  <div class="row">
+    <div class="table-responsive col-md-6" id="U1-table-data">
+      <table class="table table-bordered data"  id="U1-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Iconic</th>
+            <th>Metaphoric</th>
+            <th>Non-Iconic</th>
+            <th>Pointing</th>
+            <th>Idea</th>
+          </tr>
+        </thead>
+        <tbody id="U1-data">
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive col-md-6" id="U2-table-data">
+      <table class="table table-bordered data"  id="U2-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Iconic</th>
+            <th>Metaphoric</th>
+            <th>Non-Iconic</th>
+            <th>Pointing</th>
+          </tr>
+        </thead>
+        <tbody id="U2-data">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+</html>
+

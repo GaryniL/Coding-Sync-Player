@@ -1,0 +1,51 @@
+video::-webkit-media-controls-panel {
+    display: flex !important;
+    opacity: 1 !important;
+}
+.vjs-fade-in,.vjs-fade-out {
+visibility: visible !important;
+opacity: 1 !important;
+transition-duration: 0s!important;
+}
+
+.vjs-default-skin.vjs-has-started .vjs-control-bar {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  bottom: -3.4em !important;
+  background-color: rgba(7, 20, 30, 1) !important;
+}
+
+#timeTxt,#speedTxt {
+	font-size: 30pt; 
+	font-family:serif;
+}
+
+.showTxt {
+	font-size: 22pt; 
+	font-family:serif;
+}
+
+
+
+.btn-default{
+	font-size:7pt;
+	background-color: white;
+	border-width: 1px;
+	border-color: #54585F;
+	border-style: solid;
+    border-color: gray;
+}
+.btn-default:hover{
+	background-color: #CDCDCD;
+}
+
+.data{
+	font-size:7pt;
+}
+
+tr {
+   line-height: 0px;
+   min-height: 10px;
+   height: 10px;
+}
